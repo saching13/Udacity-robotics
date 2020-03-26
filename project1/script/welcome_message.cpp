@@ -5,7 +5,7 @@ namespace gazebo{
    class worldPluginSags : public WorldPlugin{
 	public:
 		worldPluginSags() : WorldPlugin(){
-			printf("Hello World\n");
+			printf("Welcome to 's world!\n");
 		}
 
 		void Load(physics::WorldPtr _world, sdf::ElementPtr _sdf){
