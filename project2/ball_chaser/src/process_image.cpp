@@ -4,17 +4,17 @@
 
 // Define a global client that can request services
 ros::ServiceClient client;
-
+bool moved = false;
 // This function calls the command_robot service to drive the robot in the specified direction
 void drive_robot(float lin_x, float ang_z)
 {
   ROS_INFO_STREAM("Moving the bot towards the ball");
   
   ball_chaser::DriveToTarget srv;
-  srv.linear_x = lin_x;
-  srv.angular_z = ang_z;
+  srv.request.linear_x = lin_x;
+  srv.request.angular_z = ang_z;
   
-  if(!clinet.call(srv))
+  if(!client.call(srv))
     ROS_ERROR("Failed to call service drive bot");
 }
 
@@ -24,30 +24,38 @@ void process_image_callback(const sensor_msgs::Image img)
 
     int white_pixel = 255;
     int height = img.height;
-    int width = img.width;
-    int div = width / 3;
+    int width = img.step;
     bool breakVal = false;
-    for(int h = 0; h < height; ++h){
-      for(int w = 0; w < width; ++w){
-          if(img.data[h][w] == white_pixel){
-              int movType = (int)w / div;
-              if(movType == 0){
+    for(int h = 0; h < height*width; ++h){
+      
+          if(img.data[h] == white_pixel){
+              float movType = (h % img.step)/ img.width;
+              std::cout << movType << " " << h << " " << img.width << std::endl;
+              if(movType < 1){
+                ROS_INFO("left---->");
                 drive_robot(0.0, 0.5); // left
               }
-              else if(movType == 1){
+              else if(movType < 2){
+              ROS_INFO("forward---->");
+
                 drive_robot(0.5, 0.0); // forward
               }
               else{
+               ROS_INFO("right---->");
+
                 drive_robot(0.0, -0.5); // right
               }
-              breakVal = True;
+              breakVal = true;
+              moved = true;
               break;
             }
-            if(breakVal) break;
-      }
+      
     }
     
-    if(!breakVal)drive_robot(0.0, 0.0);
+    if(!breakVal && moved){
+      drive_robot(0.0, 0.0);
+      moved = false;
+    }
 
     // TODO: Loop through each pixel in the image and check if there's a bright white one
     // Then, identify if this pixel falls in the left, mid, or right side of the image

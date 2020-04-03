@@ -11,6 +11,7 @@ ros::Publisher motor_command_publisher;
 
 bool handleCmdRobotRequest(ball_chaser::DriveToTarget::Request& req,
     ball_chaser::DriveToTarget::Response& res){
+    ROS_INFO("Received the sent comamnds");
 
         geometry_msgs::Twist motor_command;
         
@@ -18,8 +19,8 @@ bool handleCmdRobotRequest(ball_chaser::DriveToTarget::Request& req,
         motor_command.angular.z = req.angular_z;
         
         motor_command_publisher.publish(motor_command);
-        
-        res.msg_feedback = "Joint angles set - j1: " + std::to_string(joints_angles[0]) + " , j2: " + std::to_string(joints_angles[1]);
+        std::cout << "updated value of command is sent";
+        res.msg_feedback = "Updated the value of command";
         ROS_INFO_STREAM(res.msg_feedback);
 
     return true;
@@ -36,7 +37,7 @@ int main(int argc, char** argv)
     motor_command_publisher = n.advertise<geometry_msgs::Twist>("/cmd_vel", 10);
     
     ros::ServiceServer service = n.advertiseService("/ball_chaser/command_robot", handleCmdRobotRequest);
-
+    ROS_INFO("Ready to send comamnds");
     ros::spin();
 
     return 0;
