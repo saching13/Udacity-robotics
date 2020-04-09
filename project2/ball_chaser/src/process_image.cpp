@@ -26,9 +26,9 @@ void process_image_callback(const sensor_msgs::Image img)
     int height = img.height;
     int width = img.step;
     bool breakVal = false;
-    for(int h = 0; h < height*width; ++h){
+    for(int h = 0; h < height*width; h+=3){
       
-          if(img.data[h] == white_pixel){
+          if(img.data[h] == white_pixel && img.data[h + 1] == white_pixel && img.data[h + 2] == white_pixel){
               float movType = (h % img.step)/ img.width;
               std::cout << movType << " " << h << " " << img.width << std::endl;
               if(movType < 1){
