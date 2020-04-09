@@ -9,9 +9,9 @@
 <arg name="pitch" default="0"/>
 <arg name="yaw" default="-1.5707"/>
 
-<arg name="world_file" default="$(find my_robot)/worlds/myworld.world"/>
+<arg name="world_file" default="$(find jetbot)/worlds/myworld.world"/>
 
-<include file="$(find my_robot)/launch/robot_description.launch"/>
+<include file="$(find jetbot)/launch/robot_description.launch"/>
 
 <include file="$(find gazebo_ros)/launch/empty_world.launch">
   <arg name="use_sim_time" value="true"/>
@@ -20,11 +20,14 @@
   <arg name="world_name" value="$(arg world_file)"/>
 </include>
 
- <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find my_robot)/urdf/my_robot.xacro'"/> 
+ <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find jetbot)/urdf/jetbot_rviz.xacro'"/> 
 
 <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -param robot_description -model my_robot -x $(arg x) -y $(arg y) -z $(arg z) -R $(arg roll) -P $(arg pitch) -Y $(arg yaw)"/>
-<node name="rviz" pkg="rviz" type="rviz" respawn="false" args="-d $(find my_robot
+<node name="rviz" pkg="rviz" type="rviz" respawn="false" args="-d $(find jetbot
 )/rviz/config_file.rviz" />
+
+    <!-- <node name="rviz" pkg="rviz" type="rviz" args="-d $(find jetbot)/launch/jetbot.rviz"/> -->
+
 
 </launch>
 
