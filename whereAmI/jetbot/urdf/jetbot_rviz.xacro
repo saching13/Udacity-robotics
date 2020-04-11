@@ -140,7 +140,7 @@
     </link>
 
 
-    <joint name='left_wheel_hinge' type='revolute'>
+    <joint name='left_wheel_hinge' type='continuous'>
       <origin rpy="0.0 0.0 1.57079632679" xyz="0.06 0.1025 0.06"/>
       <child  link="left_wheel"/>
       <parent link="chassis"/>
@@ -172,7 +172,7 @@
     </link>
 
 
-    <joint name='right_wheel_hinge' type='revolute'>
+    <joint name='right_wheel_hinge' type='continuous'>
       <origin rpy="0.0 0.0 1.57079632679 " xyz="0.06 -0.119 0.06"/>
       <child  link="right_wheel"/>
       <parent link="chassis"/>
