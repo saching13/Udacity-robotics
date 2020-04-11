@@ -12,7 +12,7 @@
 
     <link name="chassis">
       <inertial>
-        <mass value="2.0"/>
+        <mass value="15.0"/>
         <origin rpy="0 0 0" xyz="0 0 0"/>
         <inertia ixx="0.08025" ixy="0" ixz="0" iyy="0.08025" iyz="0" izz="0.1445"/>
       </inertial>
@@ -75,7 +75,7 @@
     <pose>0 0 0.1 0 0 0</pose>
 
     <inertial>
-      <mass value="1.0"/>
+      <mass value="2.0"/>
       <origin xyz="0.0 0 0" rpy=" 0 0 0"/>
       <inertia
           ixx="0.1" ixy="0" ixz="0"
@@ -119,7 +119,7 @@
 
     <link name="left_wheel">
       <inertial>
-        <mass value="0.3"/>
+        <mass value="5"/>
         <origin rpy="0 0 0" xyz="0 0 0"/>
         <inertia ixx="0.000129167" ixy="0" ixz="0" iyy="0.000129167" iyz="0" izz="0.0000225"/>
       </inertial>
@@ -151,7 +151,7 @@
 
     <link name="right_wheel">
       <inertial>
-        <mass value="0.3"/>
+        <mass value="5"/>
         <origin rpy="0 0 0" xyz="0 0 0"/>
         <inertia ixx="0.000129167" ixy="0" ixz="0" iyy="0.000129167" iyz="0" izz="0.0000225"/>
       </inertial>
