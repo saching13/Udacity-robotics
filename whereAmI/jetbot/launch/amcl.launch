@@ -7,30 +7,34 @@
  <!-- <node pkg="tf" type="static_transform_publisher" name="map_odom_broadcaster" args="0 0 0 0 0 0 map odom 100" />  -->
 
 <node name="amcl" pkg="amcl" type="amcl" output="screen">
+<!-- adding odom_alpha and other parameters might increse accuracy-->
   <remap from="scan" to="/scan"/>
-  <param name="min_particles" value="50"/>
-  <param name="max_particles" value="200"/>
-  <param name="update_min_a" value="0.1"/>
-  <param name="update_min_b" value="0.25"/>
+  <param name="min_particles" value="200"/>
+  <param name="max_particles" value="1000"/>
+  <param name="update_min_a" value="0.0"/>
+  <param name="update_min_b" value="0.0"/>
   
+<param name="laser_model_type" value="beam"/>
   
-<param name="laser_model_type" value="likelihood_field"/>
+  <param name="laser_max_beams" value="720"/>
+  <param name="laser_min_range" value="0.08"/>
+  <param name="kdl_err" value="0.0001"/>
   
-
   <param name="odom_frame_id" value="odom"/>
   <param name="odom_model_type" value="diff-corrected"/>
-  <param name="base_frame_id" value="chassis"/> <!-- not sure -->
+  <param name="base_frame_id" value="chassis"/> 
   <param name="global_frame_id" value="map"/>
 
   <!-- <!- setting initial pose for robot here so 
        that amcl know where it is initially -> -->
   
-  <param name="initial_pose_x" value="0"/>
-  <param name="initial_pose_y" value="0"/>
-  
+  <param name="initial_pose_x" value="5.7"/>
+  <param name="initial_pose_y" value="-1.2"/>
+    <param name="initial_pose_a" value="-1.5707"/>
+
 </node>
 
-<!-- <node name="move_base" pkg="move_base" type="move_base" respawn="false" output="screen">
+<node name="move_base" pkg="move_base" type="move_base" respawn="false" output="screen">
   <remap from="scan" to="/scan"/>
   <param name="base_global_planner" value="navfn/NavfnROS"/>
   <param name="base_local_planner" value="base_local_planner/TrajectoryPlannerROS"/>
@@ -39,6 +43,6 @@
   <rosparam file="$(find jetbot)/config/local_costmap_params.yaml" command="load" />
   <rosparam file="$(find jetbot)/config/global_costmap_params.yaml" command="load" />
   <rosparam file="$(find jetbot)/config/base_local_planner_params.yaml" command="load" />
-</node> -->
+</node>
 
 </launch>

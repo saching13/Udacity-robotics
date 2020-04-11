@@ -12,7 +12,7 @@
 
     <link name="chassis">
       <inertial>
-        <mass value="2.0"/>
+        <mass value="15.0"/>
         <origin rpy="0 0 0" xyz="0 0 0"/>
         <inertia ixx="0.08025" ixy="0" ixz="0" iyy="0.08025" iyz="0" izz="0.1445"/>
       </inertial>
@@ -119,7 +119,7 @@
 
     <link name="left_wheel">
       <inertial>
-        <mass value="0.3"/>
+        <mass value="5"/>
         <origin rpy="0 0 0" xyz="0 0 0"/>
         <inertia ixx="0.000129167" ixy="0" ixz="0" iyy="0.000129167" iyz="0" izz="0.0000225"/>
       </inertial>
@@ -140,7 +140,7 @@
     </link>
 
 
-    <joint name='left_wheel_hinge' type='revolute'>
+    <joint name='left_wheel_hinge' type='continuous'>
       <origin rpy="0.0 0.0 1.57079632679" xyz="0.06 0.1025 0.06"/>
       <child  link="left_wheel"/>
       <parent link="chassis"/>
@@ -151,7 +151,7 @@
 
     <link name="right_wheel">
       <inertial>
-        <mass value="0.3"/>
+        <mass value="5"/>
         <origin rpy="0 0 0" xyz="0 0 0"/>
         <inertia ixx="0.000129167" ixy="0" ixz="0" iyy="0.000129167" iyz="0" izz="0.0000225"/>
       </inertial>
@@ -172,7 +172,7 @@
     </link>
 
 
-    <joint name='right_wheel_hinge' type='revolute'>
+    <joint name='right_wheel_hinge' type='continuous'>
       <origin rpy="0.0 0.0 1.57079632679 " xyz="0.06 -0.119 0.06"/>
       <child  link="right_wheel"/>
       <parent link="chassis"/>
